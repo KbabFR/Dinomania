@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://drjnlntei7ia5"]
+
+[ext_resource type="Script" path="res://scripts/Tuile.gd" id="1_4717m"]
+[ext_resource type="Texture2D" uid="uid://0gqos1s1bwyu" path="res://assets/tuile_base.png" id="2_2bipk"]
+[ext_resource type="Texture2D" uid="uid://c4y7wolia0pig" path="res://assets/tuile_vide.png" id="3_bp72a"]
+
+[node name="Tuile" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_4717m")
+metadata/_edit_group_ = true
+
+[node name="Surface" type="TextureRect" parent="."]
+z_index = 5
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_2bipk")
+
+[node name="Fond" type="TextureRect" parent="."]
+z_index = 4
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_bp72a")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
