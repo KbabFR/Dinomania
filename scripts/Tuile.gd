@@ -1,10 +1,10 @@
 extends Button
 
 
-const fond_fossil = "res://assets/tuile_fossil.png"
+var fond_fossil = "res://assets/tuile_fossil.png"
 const fond_vide = "res://assets/tuile_vide.png"
 
-var avoir_fossil: bool
+var avoir_fossil: bool = false
 var etre_presse: bool = false
 
 signal je_suis_presse(avoir_fossil)
@@ -22,4 +22,3 @@ func _on_button_down():
 		get_node("Surface").visible = false
 		etre_presse = true
 		je_suis_presse.emit(avoir_fossil)
-		print(avoir_fossil)
