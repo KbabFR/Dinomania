@@ -8,7 +8,7 @@ const END_POS_X = 500
 const END_POS_Y = 400
 const ESPACE = 64
 
-var dinopedia = {"zone1": [Diplodocus, Triceratops, Trex, Ankylosaure, Stegosaure, Velociraptor]}
+var dinopedia = {"zone1": [Diplodocus, Trex, Triceratops, Ankylosaure, Stegosaure, Velociraptor]}
 
 var dinos = []
 var ma_zone = "zone1"
@@ -19,13 +19,14 @@ func _ready():
 	#On choisit les dinos qu'on souhaite récupérer
 	# les 3 premiers à 70% -> 50% -> 30%
 	for dinosaure in dinopedia.get(ma_zone):
-		if(randi() % 101 < (dinosaure.rarity - dinos.size() * 20) + 10):
-			dinos.append(dinosaure)
+		if(dinos.size() < 3 && randi() % 101 < (dinosaure.rarity - dinos.size() * 20) + 10):
+			dinos.append(dinosaure.new())
 	if(dinos.size() == 0):
-		dinos.append(dinopedia.get(ma_zone).back)
+		dinos.append(dinopedia.get(ma_zone).back().new())
 	if(dinos.size() == 1):
 		pass # add discoin
-	print(dinos)
+	for dino in dinos:
+		print(dino.class)
 	
 	# On défini où il y aura des dinos
 	for dinosaure in dinos:
@@ -51,13 +52,13 @@ func on_other_fossil(dinosaure):
 	for dino in dinos:
 		if(dino != dinosaure || !dino.pattern_actuel.is_empty()):
 			for coord in dinosaure.pattern_actuel:
-				if(dino.patter_actuel.has(coord)):
+				if(dino.pattern_actuel.has(coord)):
 					return true
 	return false
 
 # Vérifie si la coordonnée passé en argument figure dans l'un des dinos, retourne le dino si c'est le cas
 func find_if_fossil(coord: Vector2):
 	for dino in dinos:
-		if(dino.patter_actuel.has(coord)):
+		if(dino.pattern_actuel.has(coord)):
 			return dino
 	return null
